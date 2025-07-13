@@ -46,6 +46,8 @@ jobs:
         - language: go
           build-mode: autobuild
         - language: java-kotlin
+        - if: matrix.language == 'java'  
+          uses: github/codeql-action/autobuild@v2
           build-mode: none # This mode only analyzes Java. Set this to 'autobuild' or 'manual' to analyze Kotlin too.
         - language: javascript-typescript
           build-mode: none
@@ -90,9 +92,7 @@ jobs:
     # to build your code.
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
-    
-    - if: matrix.language == 'java'  
-      uses: github/codeql-action/autobuild@v3
+      
     - if: matrix.build-mode == 'manual'
       shell: bash
       run: |
