@@ -92,7 +92,7 @@ jobs:
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
     
     - if: matrix.language == 'java'  
-      uses: github/codeql-action/autobuild@v2
+      uses: github/codeql-action/autobuild@v3
     - if: matrix.build-mode == 'manual'
       shell: bash
       run: |
