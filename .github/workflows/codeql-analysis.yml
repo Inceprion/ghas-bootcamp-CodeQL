@@ -63,9 +63,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       
-    - if: matrix.language == 'java'
-      name: Autobuild
-      uses: github/codeql-action/autobuild@v2
+   
       
     # Add any setup steps before running the `github/codeql-action/init` action.
     # This includes steps like installing compilers or runtimes (`actions/setup-node`
@@ -104,7 +102,10 @@ jobs:
         echo '  make bootstrap'
         echo '  make release'
         exit 1
-
+    - if: matrix.language == 'java'
+      name: Autobuild
+      uses: github/codeql-action/autobuild@v2
+      
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
       with:
