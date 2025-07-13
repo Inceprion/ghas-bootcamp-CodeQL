@@ -46,8 +46,6 @@ jobs:
         - language: go
           build-mode: autobuild
         - language: java-kotlin
-        - if: matrix.language == 'java'  
-          uses: github/codeql-action/autobuild@v2
           build-mode: none # This mode only analyzes Java. Set this to 'autobuild' or 'manual' to analyze Kotlin too.
         - language: javascript-typescript
           build-mode: none
@@ -64,7 +62,11 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-
+      
+    - if: matrix.language == 'java'
+      name: Autobuild
+      uses: github/codeql-action/autobuild@v2
+      
     # Add any setup steps before running the `github/codeql-action/init` action.
     # This includes steps like installing compilers or runtimes (`actions/setup-node`
     # or others). This is typically only required for manual builds.
